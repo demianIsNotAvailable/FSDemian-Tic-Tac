@@ -1,5 +1,9 @@
-const jugador = "O";
-const computer = "X";
+const jugador1 = "O";
+const jugador2 = "X";
+
+let jugadorActual = jugador1
+
+
 
 let tableroLleno = false;
 let tablero = ["", "", "", "", "", "", "", "", ""];
@@ -13,8 +17,8 @@ const board_container = document.querySelector(".juego");
 const crearTablero = () => {
   board_container.innerHTML = "";
   tablero.forEach((e, i) => {
-    board_container.innerHTML += `<div id="casilla${i}" class="casilla" onclick="addjugadorMove(${i})">${tablero[i]}</div>`;
-    if (e == jugador || e == computer) {
+    board_container.innerHTML += `<div id="casilla${i}" class="casilla" onclick="mover(${i})">${tablero[i]}</div>`;
+    if (e == jugador1 || e == jugador2) {
       document.querySelector(`#casilla${i}`).classList.add("ocupada");
     }
   });
@@ -22,7 +26,7 @@ const crearTablero = () => {
 
 // resetear tablero
 
-const resetearTablero = () => {
+const reset = () => {
   tablero = ["", "", "", "", "", "", "", "", ""];
   tableroLleno = false;
   ganador.classList.remove("jugadorGana");
@@ -30,5 +34,21 @@ const resetearTablero = () => {
   ganador.innerText = "";
   crearTablero();
 };
+
+// jugar pvp
+
+const mover = (i) => {
+  if (tablero[i] == "") {
+    tablero[i] = jugadorActual;
+    crearTablero();
+    comprobarGanador();
+    cambiarTurno();
+  }
+};
+
+// cambiar turno
+const cambiarTurno = () => {
+  jugadorActual = jugadorActual === jugador1 ? jugador2 : jugador1
+}
 
 crearTablero();
