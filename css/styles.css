@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+}
+
+h1 {
+  font-size: 4rem;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  margin-top: 1em;
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+}
+
+.juego {
+  display: grid;
+  box-shadow: 0 0 20px rgba(152, 0, 253, 0.25);
+  grid-template-columns: auto auto auto;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.casilla {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  border: 3px solid black;
+  transition: all 0.2s ease-in-out;
+
+}
+
+.casilla:hover {
+  cursor: pointer;
+  background: rgba(9, 255, 0, 0.25);
+}
+
+.ocupada:hover {
+  background: rgba(255, 18, 1, 0.25);
+}
+
+#casilla0,
+#casilla1,
+#casilla2 {
+  border-top: none;
+}
+
+#casilla0,
+#casilla3,
+#casilla6 {
+  border-left: none;
+}
+
+#casilla6,
+#casilla7,
+#casilla8 {
+  border-bottom: none;
+}
+
+#casilla2,
+#casilla5,
+#casilla8 {
+  border-right: none;
+}
+
+button {
+  outline: none;
+  background: rgb(35, 15, 214);
+  padding: 12px 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  cursor: pointer;
+  background: green;
+  color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5em;
+  }
+
+  h2 {
+    margin-top: 1em;
+    font-size: 1.3rem;
+  }
+}
