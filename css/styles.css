@@ -98,6 +98,12 @@ button:hover {
   color: white;
 }
 
+.ganar {
+  pointer-events: none;
+  background-color: gold;
+  color: aqua
+}
+
 @media only screen and (max-width: 600px) {
   h1 {
     font-size: 3rem;

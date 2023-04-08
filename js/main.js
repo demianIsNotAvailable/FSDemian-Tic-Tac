@@ -29,7 +29,7 @@ const reset = () => {
   tablero = ["", "", "", "", "", "", "", "", ""];
   turnos = 0;
   ganador.classList.remove("jugadorGana");
-  ganador.innerText = "";
+  pvp.innerText = "Jugar 1 contra Jugador 2";
   crearTablero();
 };
 
@@ -42,41 +42,65 @@ const mover = (i) => {
     comprobarGanador(tablero);
     cambiarTurno();
     crearTablero();
-  } else quitar(i)
+  } else quitar(i);
 };
 
 const quitar = (i) => {
   if (turnos === 6 && tablero[i] === jugadorActual) {
     tablero[i] = "";
     turnos--;
-    crearTablero()
-    return null
+    crearTablero();
+    return null;
   }
 };
 
 // comprobar si hay un ganador
 
-const comprobarGanador = (tablero) => {
-  for (let i=0; i<3; i++) {
-    if ((tablero[i]===jugadorActual) && (tablero[i]===tablero[i+3]) && (tablero[i]===tablero[i+6])) { // comprobar columnas
-      console.log("columna")
-      return true;
+const comprobarGanador = () => {
+  let ganador = comprobarTablero()
+  if (ganador === jugador1) {
+    pvp.innerText = "Gana el jugador 1!"
+  }
+  else if (ganador === jugador2) pvp.innerText = "Gana el jugador 2!"
+};
+
+const comprobarLinea= (a, b, c) => {
+  if (tablero[a] && tablero[a]===tablero[b] && tablero[a]===tablero[c])
+    return true;
+}
+
+const comprobarTablero = () => {
+  for (i = 0; i < 9; i += 3) {
+    if (comprobarLinea(i, i + 1, i + 2)) {
+      document.querySelector(`#casilla${i}`).classList.add("ganar");
+      document.querySelector(`#casilla${i + 1}`).classList.add("ganar");
+      document.querySelector(`#casilla${i + 2}`).classList.add("ganar");
+      return tablero[i];
     }
   }
-  for (let i=0; i<8; i+=3) {
-    if ((tablero[i]===jugadorActual) && (tablero[i]===tablero[i+1]) && (tablero [i]===tablero[i+2])) { // comprobar filas
-      console.log("fila")
-      return true;
+
+  for (i = 0; i < 3; i++) {
+    if (comprobarLinea(i, i + 3, i + 6)) {
+      document.querySelector(`#casilla${i}`).classList.add("ganar");
+      document.querySelector(`#casilla${i + 3}`).classList.add("ganar");
+      document.querySelector(`#casilla${i + 6}`).classList.add("ganar");
+      return tablero[i];
     }
   }
-  if ((tablero[0]===jugadorActual) && (tablero[0]===tablero[4]) && (tablero[0]===tablero[8])) {
-    console.log("diagonal principal")
-    return true;
+
+  if (comprobarLinea(0, 4, 8)) {
+    document.querySelector(`#casilla${0}`).classList.add("ganar");
+    document.querySelector(`#casilla${4}`).classList.add("ganar");
+    document.querySelector(`#casilla${8}`).classList.add("ganar");
+    return tablero[0];
   }
-  if ((tablero[2]===jugadorActual) && (tablero[2]===tablero[4]) && (tablero[2]===tablero[6])) {
-    console.log("diagonal secundaria")
-    return true;
-  }  
+
+  if (comprobarLinea(2, 4, 6)) {
+    document.querySelector(`#casilla${2}`).classList.add("ganar");
+    document.querySelector(`#casilla${4}`).classList.add("ganar");
+    document.querySelector(`#casilla${6}`).classList.add("ganar");
+    return tablero[2];
+  }
 };
 
 // cambiar turno
