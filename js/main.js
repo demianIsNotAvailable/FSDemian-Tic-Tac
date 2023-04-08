@@ -39,14 +39,14 @@ const mover = (i) => {
   if (turnos < 6 && tablero[i] == "") {
     tablero[i] = jugadorActual;
 
-    comprobarGanador();
+    comprobarGanador(tablero);
     cambiarTurno();
     crearTablero();
-  } else if (turnos===6) quitar(i)
+  } else quitar(i)
 };
 
 const quitar = (i) => {
-  if (tablero[i] === jugadorActual) {
+  if (turnos === 6 && tablero[i] === jugadorActual) {
     tablero[i] = "";
     turnos--;
     crearTablero()
@@ -56,7 +56,28 @@ const quitar = (i) => {
 
 // comprobar si hay un ganador
 
-const comprobarGanador = () => {};
+const comprobarGanador = (tablero) => {
+  for (let i=0; i<3; i++) {
+    if ((tablero[i]===jugadorActual) && (tablero[i]===tablero[i+3]) && (tablero[i]===tablero[i+6])) { // comprobar columnas
+      console.log("columna")
+      return true;
+    }
+  }
+  for (let i=0; i<8; i+=3) {
+    if ((tablero[i]===jugadorActual) && (tablero[i]===tablero[i+1]) && (tablero [i]===tablero[i+2])) { // comprobar filas
+      console.log("fila")
+      return true;
+    }
+  }
+  if ((tablero[0]===jugadorActual) && (tablero[0]===tablero[4]) && (tablero[0]===tablero[8])) {
+    console.log("diagonal principal")
+    return true;
+  }
+  if ((tablero[2]===jugadorActual) && (tablero[2]===tablero[4]) && (tablero[2]===tablero[6])) {
+    console.log("diagonal secundaria")
+    return true;
+  }  
+};
 
 // cambiar turno
 const cambiarTurno = () => {
