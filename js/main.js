@@ -16,12 +16,8 @@ const crearTablero = () => {
   mesa.innerHTML = "";
   tablero.forEach((e, i) => {
     mesa.innerHTML += `<div id="casilla${i}" class="casilla" onclick="mover(${i})">${tablero[i]}</div>`;
-    if (turnos < 6 && (e == jugador1 || e == jugador2)) {
-      document.querySelector(`#casilla${i}`).classList.add("ocupada");
-    } else if (turnos == 6 && e !== jugadorActual)
-      document.querySelector(`#casilla${i}`).classList.add("ocupada");
-  });
-};
+  })
+}
 
 const actualizarTablero = () => {
   if (turnos < 6) {
@@ -38,7 +34,7 @@ const actualizarTablero = () => {
         document.querySelector(`#casilla${i}`).classList.add("ocupada");
         document.querySelector(`#casilla${i}`).innerText = tablero[i];
       } 
-      else if (turnos ==6) {
+      else {
         document.querySelector(`#casilla${i}`).classList.remove("ocupada");
         document.querySelector(`#casilla${i}`).innerText = tablero[i];
       }
