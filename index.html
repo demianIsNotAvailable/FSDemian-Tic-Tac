@@ -9,15 +9,29 @@
     <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body>
-    <!-- Tablero -->
-    <div class="container">
-      <h1>Tic-Tac-Toe</h1>
-      <h2 id="pvp">Jugador 1 contra Jugador 2</h2><br>
-      <div class="juego"></div>
-      <h2 id="ganador"></h2>
-      <button onclick="reset()">RESET</button>
+    <!-- Vista juego -->
+    <div class="vista" id="vista3">
+      <div class="infoContainer" id="infoContainer1">
+        <div class="info" id="info1">
+          <h2></h2>
+        </div>
+      </div>
+      <!-- Tablero -->
+      <div class="container">
+        <h1>Tic-Tac-Toe</h1>
+        <h2 id="pvp">Jugador 1 contra Jugador 2</h2>
+        <br />
+        <div class="juego"></div>
+        <h2 id="ganador"></h2>
+        <button onclick="reset()">RESET</button>
+      </div>
+      <div class="infoContainer" id="infoContainer2">
+        <div class="info" id="info2">
+          <h2></h2>
+          <h3></h3>
+        </div>
+      </div>
     </div>
-
     <script src="js/main.js"></script>
   </body>
 </html>

@@ -10,14 +10,14 @@ const mesa = document.querySelector(".juego");
 
 // funciones
 
-// (re)crear tablero 
+// (re)crear tablero
 
 const crearTablero = () => {
   mesa.innerHTML = "";
   tablero.forEach((e, i) => {
     mesa.innerHTML += `<div id="casilla${i}" class="casilla" onclick="mover(${i})">${tablero[i]}</div>`;
-  })
-}
+  });
+};
 
 const actualizarTablero = () => {
   if (turnos < 6) {
@@ -27,14 +27,12 @@ const actualizarTablero = () => {
         document.querySelector(`#casilla${i}`).innerText = tablero[i];
       }
     });
-  } 
-  else if (turnos == 6) {
+  } else if (turnos == 6) {
     tablero.forEach((e, i) => {
       if (e !== jugadorActual) {
         document.querySelector(`#casilla${i}`).classList.add("ocupada");
         document.querySelector(`#casilla${i}`).innerText = tablero[i];
-      } 
-      else {
+      } else {
         document.querySelector(`#casilla${i}`).classList.remove("ocupada");
         document.querySelector(`#casilla${i}`).innerText = tablero[i];
       }
@@ -47,6 +45,7 @@ const actualizarTablero = () => {
 const reset = () => {
   tablero = ["", "", "", "", "", "", "", "", ""];
   turnos = 0;
+  jugadorActual = "O";
   jugando = true;
   pvp.innerText = "Jugar 1 contra Jugador 2";
   ganador.innerText = "";
