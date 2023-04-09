@@ -59,7 +59,7 @@ const mover = (i) => {
     if (turnos < 6 && tablero[i] == "") {
       tablero[i] = jugadorActual;
 
-      comprobarGanador(tablero);
+      comprobarGanador();
       cambiarTurno();
       actualizarTablero();
     } else quitar(i);
@@ -136,5 +136,18 @@ const cambiarTurno = () => {
   jugadorActual = jugadorActual === jugador1 ? jugador2 : jugador1;
   turnos++;
 };
+
+
+// cambiar vistas 
+const cambiarVista = (destino) => {
+  const vistas = document.querySelectorAll("div.vista")
+  for (let i=0; i<vistas.length; i++)  vistas[i].classList.add("oculto")
+    if (destino === `empezar`) document.querySelector("vistaSeleccion").classList.remove("oculto")
+    if (destino === `reglas`) document.querySelector("vistaReglas").classList.remove("oculto")
+    if (destino === `juego`) document.querySelector("vistaJuego").classList.remove("oculto")
+    if (destino === `victoria`) document.querySelector("vistaVictoria").classList.remove("oculto")
+
+
+}
 
 crearTablero();

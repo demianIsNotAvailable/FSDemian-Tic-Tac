@@ -9,8 +9,21 @@
     <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body>
-    <!-- Vista juego -->
-    <div class="vista" id="vista3">
+
+    <div class="vista" id="vistaInicio">
+      <div id="border">
+        <div id="inicio">
+          <h1 id="titulo">TIC TAC TOE</h1>
+          <div id="botonera">
+            <button id="botonInicio" onclick="cambiarVista(`empezar`)">JUGAR</button>
+            <button id="botonReglas" onclick="cambiarVista(`reglas`)">REGLAS</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- Vista juego -->
+    <div class="vista oculto" id="vistaJuego">
       <div class="infoContainer" id="infoContainer1">
         <div class="info" id="info1">
           <h2></h2>

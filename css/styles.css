@@ -12,6 +12,89 @@ body {
 
 .vista {
   display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+#vistaInicio {
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+#border {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40em;
+  width: 60em;
+  border-radius: 5%;
+  background: linear-gradient(35deg, #d3561c, #000000, #000000, #9800fd);
+  background-size: 800% 800%;
+
+  animation: fondo 16s ease infinite;
+}
+
+@keyframes fondo {
+  0% {
+    background-position: 81% 0%;
+  }
+  50% {
+    background-position: 20% 100%;
+  }
+  100% {
+    background-position: 81% 0%;
+  }
+}
+
+#inicio {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 39em;
+  width: 58.5em;
+  border-radius: 5%;
+  background-color: rgb(0, 0, 0);
+}
+
+#titulo {
+  background: linear-gradient(90deg, #d3561c 0%, #03e9f4 50%, #9800fd 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#botonera {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 10em;
+  width: 100%;
+}
+#botonInicio,
+#botonReglas {
+  padding: 25px 30px;
+  background-color: #000000;
+  color: #9800fd;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 4px;
+  overflow: hidden;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+#botonReglas {
+  color: #d3561c;
+}
+
+#botonInicio:hover,
+#botonReglas:hover {
+  background: #03e9f4;
+  color: #050801;
+  box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+    0 0 200px #03e9f4;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
 }
 
 .infoContainer {
@@ -49,6 +132,7 @@ h1 {
   font-size: 4rem;
   margin-bottom: 0.5em;
   color: silver;
+  user-select: none;
 }
 
 h2 {
@@ -56,6 +140,7 @@ h2 {
   font-size: 2rem;
   margin-bottom: 0.5em;
   color: silver;
+  user-select: none;
 }
 
 .juego {
@@ -97,7 +182,7 @@ h2 {
 .ganar {
   background-color: royalblue;
   color: aqua;
-  transition: all 1s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 #casilla0,
@@ -141,6 +226,6 @@ button:hover {
   color: white;
 }
 
-.ocultar {
+.oculto {
   display: none;
 }
