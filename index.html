@@ -9,15 +9,23 @@
     <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body>
-
-    <div class="vista" id="vistaInicio">
-      <div id="border">
-        <div id="inicio">
+      <!-- vista de inicio -->
+    <div class="vista oculto" id="vistaInicio">
+      <div class="border">
+        <div class="principal">
           <h1 id="titulo">TIC TAC TOE</h1>
           <div id="botonera">
             <button id="botonInicio" onclick="cambiarVista(`empezar`)">JUGAR</button>
             <button id="botonReglas" onclick="cambiarVista(`reglas`)">REGLAS</button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vista" id="vistaReglas">
+      <div class="border">
+        <div class="principal">
+
         </div>
       </div>
     </div>
@@ -31,8 +39,8 @@
       </div>
       <!-- Tablero -->
       <div class="container">
-        <h1>Tic-Tac-Toe</h1>
-        <h2 id="pvp">Jugador 1 contra Jugador 2</h2>
+        <h1></h1>
+        <h2 id="pvp"></h2>
         <br />
         <div class="juego"></div>
         <h2 id="ganador"></h2>
