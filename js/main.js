@@ -1,16 +1,16 @@
 const jugador1 = "O";
 const jugador2 = "X";
 
+let jugando = true;
 let jugadorActual = jugador1;
 let turnos = 0;
-
 let tablero = ["", "", "", "", "", "", "", "", ""];
 
 const mesa = document.querySelector(".juego");
 
 // funciones
 
-// crear tablero
+// (re)crear tablero 
 
 const crearTablero = () => {
   mesa.innerHTML = "";
@@ -23,27 +23,56 @@ const crearTablero = () => {
   });
 };
 
-// resetear tablero
+const actualizarTablero = () => {
+  if (turnos < 6) {
+    tablero.forEach((e, i) => {
+      if (e === jugador1 || e === jugador2) {
+        document.querySelector(`#casilla${i}`).classList.add("ocupada");
+        document.querySelector(`#casilla${i}`).innerText = tablero[i];
+      }
+    });
+  } 
+  else if (turnos == 6) {
+    tablero.forEach((e, i) => {
+      if (e !== jugadorActual) {
+        document.querySelector(`#casilla${i}`).classList.add("ocupada");
+        document.querySelector(`#casilla${i}`).innerText = tablero[i];
+      } 
+      else if (turnos ==6) {
+        document.querySelector(`#casilla${i}`).classList.remove("ocupada");
+        document.querySelector(`#casilla${i}`).innerText = tablero[i];
+      }
+    });
+  }
+};
+
+// resetear juego
 
 const reset = () => {
   tablero = ["", "", "", "", "", "", "", "", ""];
   turnos = 0;
-  ganador.classList.remove("jugadorGana");
+  jugando = true;
   pvp.innerText = "Jugar 1 contra Jugador 2";
+  ganador.innerText = "";
   crearTablero();
 };
 
-// jugar pvp (duda sobre argumentos)
+// 2 jugadores
 
 const mover = (i) => {
-  if (turnos < 6 && tablero[i] == "") {
-    tablero[i] = jugadorActual;
+  if (jugando === true) {
+    if (turnos < 6 && tablero[i] == "") {
+      tablero[i] = jugadorActual;
 
-    comprobarGanador(tablero);
-    cambiarTurno();
-    crearTablero();
-  } else quitar(i);
+      comprobarGanador(tablero);
+      cambiarTurno();
+      actualizarTablero();
+    } else quitar(i);
+  }
+  return null;
 };
+
+// recolocar ficha
 
 const quitar = (i) => {
   if (turnos === 6 && tablero[i] === jugadorActual) {
@@ -57,48 +86,52 @@ const quitar = (i) => {
 // comprobar si hay un ganador
 
 const comprobarGanador = () => {
-  let ganador = comprobarTablero()
-  if (ganador === jugador1) {
-    pvp.innerText = "Gana el jugador 1!"
+  let ganador = comprobarTablero();
+  if (ganador === jugadorActual) {
+    tablero.forEach((e, i) => {
+      if (e === jugadorActual)
+        document.querySelector(`#casilla${i}`).classList.add("ganar");
+      document.querySelector(`#casilla${i}`).classList.add("inactiva");
+    });
+    pvp.innerText = "Gana el jugador 1!";
+    jugando = false;
+  } else if (ganador === jugador2) {
+    pvp.innerText = "Gana el jugador 2!";
+
+    document.querySelector("#ganador").innerText = "patatas";
+    jugando = false;
   }
-  else if (ganador === jugador2) pvp.innerText = "Gana el jugador 2!"
 };
 
-const comprobarLinea= (a, b, c) => {
-  if (tablero[a] && tablero[a]===tablero[b] && tablero[a]===tablero[c])
-    return true;
-}
+// comprobar si una línea es ganadora
 
+const comprobarLinea = (a, b, c) => {
+  if (tablero[a] && tablero[a] === tablero[b] && tablero[a] === tablero[c])
+    return true;
+};
+
+// recorrer el tablero por:
+// - filas
+// - columnas
+// - diagonales
 const comprobarTablero = () => {
   for (i = 0; i < 9; i += 3) {
     if (comprobarLinea(i, i + 1, i + 2)) {
-      document.querySelector(`#casilla${i}`).classList.add("ganar");
-      document.querySelector(`#casilla${i + 1}`).classList.add("ganar");
-      document.querySelector(`#casilla${i + 2}`).classList.add("ganar");
       return tablero[i];
     }
   }
 
   for (i = 0; i < 3; i++) {
     if (comprobarLinea(i, i + 3, i + 6)) {
-      document.querySelector(`#casilla${i}`).classList.add("ganar");
-      document.querySelector(`#casilla${i + 3}`).classList.add("ganar");
-      document.querySelector(`#casilla${i + 6}`).classList.add("ganar");
       return tablero[i];
     }
   }
 
   if (comprobarLinea(0, 4, 8)) {
-    document.querySelector(`#casilla${0}`).classList.add("ganar");
-    document.querySelector(`#casilla${4}`).classList.add("ganar");
-    document.querySelector(`#casilla${8}`).classList.add("ganar");
     return tablero[0];
   }
 
   if (comprobarLinea(2, 4, 6)) {
-    document.querySelector(`#casilla${2}`).classList.add("ganar");
-    document.querySelector(`#casilla${4}`).classList.add("ganar");
-    document.querySelector(`#casilla${6}`).classList.add("ganar");
     return tablero[2];
   }
 };

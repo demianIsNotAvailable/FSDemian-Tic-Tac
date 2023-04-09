@@ -46,6 +46,7 @@ h2 {
   border: 3px solid black;
   transition: all 0.2s ease-in-out;
 
+
 }
 
 .casilla:hover {
@@ -55,6 +56,11 @@ h2 {
 
 .ocupada:hover {
   background: rgba(255, 18, 1, 0.63);
+}
+
+.inactiva {
+  pointer-events: none;
+  user-select: none;
 }
 
 #casilla0,
@@ -99,9 +105,10 @@ button:hover {
 }
 
 .ganar {
-  pointer-events: none;
-  background-color: gold;
-  color: aqua
+ 
+  background-color: white;
+  color: aqua;
+  
 }
 
 @media only screen and (max-width: 600px) {
@@ -115,3 +122,4 @@ button:hover {
     font-size: 1.3rem;
   }
 }
+
