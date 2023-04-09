@@ -9,47 +9,66 @@
     <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body>
-      <!-- vista de inicio -->
-    <div class="vista oculto" id="vistaInicio">
+    <!-- vista de inicio -->
+    <div class="vista" id="vistaInicio">
       <div class="border">
         <div class="principal">
           <h1 id="titulo">TIC TAC TOE</h1>
           <div id="botonera">
-            <button id="botonInicio" onclick="cambiarVista(`empezar`)">JUGAR</button>
-            <button id="botonReglas" onclick="cambiarVista(`reglas`)">REGLAS</button>
+            <button id="botonInicio" onclick="cambiarVista(`empezar`)">
+              JUGAR
+            </button>
+            <button id="botonReglas" onclick="cambiarVista(`reglas`)">
+              REGLAS
+            </button>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="vista" id="vistaReglas">
+    <!-- vista de reglas -->
+    <div class="vista oculto" id="vistaReglas">
       <div class="border">
         <div class="principal">
-
+          <h2 id="reglasTitulo">REGLAS</h2>
+          <p class="reglas">
+            ¿Alguna vez has jugado al tres en raya? <br />
+            <span>Pues ahora sólo tienes 3 fichas...</span>
+            Si se te agotan tendrás que recolocarlas...
+          </p>
+          <button id="botonContinuar" onclick="cambiarVista(`empezar`), crearTablero()">
+            CONTINUAR
+          </button>
         </div>
       </div>
     </div>
 
-        <!-- Vista juego -->
+    <!-- Vista juego -->
     <div class="vista oculto" id="vistaJuego">
-      <div class="infoContainer" id="infoContainer1">
-        <div class="info" id="info1">
-          <h2></h2>
-        </div>
-      </div>
-      <!-- Tablero -->
-      <div class="container">
-        <h1></h1>
-        <h2 id="pvp"></h2>
-        <br />
-        <div class="juego"></div>
-        <h2 id="ganador"></h2>
-        <button onclick="reset()">RESET</button>
-      </div>
-      <div class="infoContainer" id="infoContainer2">
-        <div class="info" id="info2">
-          <h2></h2>
-          <h3></h3>
+      <div class="border">
+        <div class="principal" id="principalJuego">
+          <div class="infoContainer" id="infoContainer1">
+            <div class="info" id="info1">
+              <h2>JUGADOR 1</h2>
+
+              <h2>3 Fichas</h2>
+              <span></span>
+            </div>
+          </div>
+          <!-- Tablero -->
+          <div class="container">
+            <h1></h1>
+            <br />
+            <div class="juego"></div>
+            <h2 id="ganador"></h2>
+            <button onclick="reset()">RESET</button>
+          </div>
+          <div class="infoContainer" id="infoContainer2">
+            <div class="info" id="info2">
+              <h2>JUGADOR 2</h2>
+              <h2>3 Fichas</h2>
+              <span onclick="cambiarVista(`inicio`)">X</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -47,8 +47,7 @@ const reset = () => {
   turnos = 0;
   jugadorActual = "O";
   jugando = true;
-  pvp.innerText = "Jugar 1 contra Jugador 2";
-  ganador.innerText = "";
+
   crearTablero();
 };
 
@@ -86,14 +85,8 @@ const comprobarGanador = () => {
     tablero.forEach((e, i) => {
       if (e === jugadorActual)
         document.querySelector(`#casilla${i}`).classList.add("ganar");
-      document.querySelector(`#casilla${i}`).classList.add("inactiva");
+        document.querySelector(`#casilla${i}`).classList.add("inactiva");
     });
-    pvp.innerText = "Gana el jugador 1!";
-    jugando = false;
-  } else if (ganador === jugador2) {
-    pvp.innerText = "Gana el jugador 2!";
-
-    document.querySelector("#ganador").innerText = "patatas";
     jugando = false;
   }
 };
@@ -142,10 +135,11 @@ const cambiarTurno = () => {
 const cambiarVista = (destino) => {
   const vistas = document.querySelectorAll("div.vista")
   for (let i=0; i<vistas.length; i++)  vistas[i].classList.add("oculto")
-    if (destino === `empezar`) document.querySelector("#vistaSeleccion").classList.remove("oculto")
+    if (destino === `empezar`) document.querySelector("#vistaJuego").classList.remove("oculto")
     if (destino === `reglas`) document.querySelector("#vistaReglas").classList.remove("oculto")
     if (destino === `juego`) document.querySelector("#vistaJuego").classList.remove("oculto")
     if (destino === `victoria`) document.querySelector("#vistaVictoria").classList.remove("oculto")
+    if (destino === `inicio`) document.querySelector("#vistaInicio").classList.remove("oculto")
 
 
 }
