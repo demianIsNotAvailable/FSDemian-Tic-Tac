@@ -1,6 +1,7 @@
 const jugador1 = "O";
 const jugador2 = "X";
 
+
 let jugando = true;
 let jugadorActual = jugador1;
 let turnos = 0;
@@ -135,7 +136,7 @@ const cambiarTurno = () => {
 const cambiarVista = (destino) => {
   const vistas = document.querySelectorAll("div.vista")
   for (let i=0; i<vistas.length; i++)  vistas[i].classList.add("oculto")
-    if (destino === `empezar`) document.querySelector("#vistaJuego").classList.remove("oculto")
+    if (destino === `empezar`) document.querySelector("#vistaJugadores").classList.remove("oculto")
     if (destino === `reglas`) document.querySelector("#vistaReglas").classList.remove("oculto")
     if (destino === `juego`) document.querySelector("#vistaJuego").classList.remove("oculto")
     if (destino === `victoria`) document.querySelector("#vistaVictoria").classList.remove("oculto")
@@ -144,4 +145,4 @@ const cambiarVista = (destino) => {
 
 }
 
-crearTablero();
+crearTablero()

@@ -35,14 +35,29 @@
             <span>Pues ahora sólo tienes 3 fichas...</span>
             Si se te agotan tendrás que recolocarlas...
           </p>
-          <button id="botonContinuar" onclick="cambiarVista(`empezar`), crearTablero()">
+          <button id="botonContinuar" onclick="cambiarVista(`inicio`)">
             CONTINUAR
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Vista juego -->
+    <!-- vista jugadores -->
+    <div class="vista oculto" id="vistaJugadores">
+      <div class="border">
+        <div class="principal">
+          <div id="inputs">
+            <input type="text" class="form" id="input1" placeholder="Jugador 1" required>
+            <input type="text" class="form" id="input2" placeholder="Jugador 2" required>
+          </div>
+          <div>
+            <input type="submit" id="enviar" value="▶" onclick="cambiarVista(`juego`)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- vista juego -->
     <div class="vista oculto" id="vistaJuego">
       <div class="border">
         <div class="principal" id="principalJuego">
