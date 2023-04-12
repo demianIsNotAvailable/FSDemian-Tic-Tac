@@ -69,6 +69,9 @@ body {
   background: linear-gradient(90deg, #d3561c 0%, #03e9f4 50%, #9800fd 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
 }
 
 #botonera {
@@ -134,6 +137,7 @@ body {
 }
 
 .form {
+  height: 2em;
   width: 15em;
   padding: 0.8em;
   margin-left: 3em;
@@ -170,7 +174,7 @@ body {
 }
 
 #enviar:hover {
-  border: 5px solid rgba(211, 86, 28,0.5);
+  border: 5px solid rgba(211, 86, 28, 0.502);
   background: linear-gradient(to left top, #000, #8b5db0) fixed;
 }
 
@@ -308,4 +312,114 @@ button:hover {
 .oculto {
   display: none;
   transition-duration: 2s;
+}
+
+
+
+
+div.btn-container{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  margin-top: 5em;
+}
+
+div.btn-container i{
+  display: inline-block;
+  position: relative;
+  top: -9px;
+}
+
+label {
+  font-size: 13px;
+  color: #03e9f4;
+  font-weight: 500;
+}
+
+.btn-color-mode-switch{
+  display: inline-block;
+  margin: 0px;
+  position: relative;
+}
+
+.btn-color-mode-switch > label.btn-color-mode-switch-inner{
+  margin: 0px;
+  width: 140px;
+  height: 30px;
+  background: #d3561c80;
+  border-radius: 26px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  /*box-shadow: 0px 0px 8px 0px rgba(17, 17, 17, 0.34) inset;*/
+  display: block;
+}
+
+.btn-color-mode-switch > label.btn-color-mode-switch-inner:before{
+  content: attr(data-on);
+  position: absolute;
+  font-size: 12px;
+  font-weight: 500;
+  top: 7px;
+  right: 20px;
+
+}
+
+.btn-color-mode-switch > label.btn-color-mode-switch-inner:after{
+  content: attr(data-off);
+  width: 70px;
+  height: 16px;
+  background: #9800fd;
+  border-radius: 26px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0px 0px 20px -2px #03e9f4;
+  padding: 5px 0px;
+}
+
+.btn-color-mode-switch > .alert{
+  display: none;
+  background: #FF9800;
+  border: none;
+  color: #03e9f4;
+}
+
+.btn-color-mode-switch input[type="checkbox"]{
+  cursor: pointer;
+  width: 50px;
+  height: 25px;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  margin: 0px;
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner{
+  background: #4e2d69;
+  color: #03e9f4;
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:after{
+  content: attr(data-on);
+  left: 68px;
+  background: #d3561c;
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:before{
+  content: attr(data-off);
+  right: auto;
+  left: 20px;
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner{
+  /*background: #66BB6A; */
+  /*color: #fff;*/
+}
+
+.btn-color-mode-switch input[type="checkbox"]:checked ~ .alert{
+  display: block;
 }

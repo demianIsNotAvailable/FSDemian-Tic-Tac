@@ -1,10 +1,14 @@
 const jugador1 = "O";
 const jugador2 = "X";
 
-
+let nombreJugador1 = "";
+let nombreJugador2 = "";
+let cpu = false;
 let jugando = true;
 let jugadorActual = jugador1;
 let turnos = 0;
+let fichasJugador1 = 3;
+let fichasJugador2 = 3;
 let tablero = ["", "", "", "", "", "", "", "", ""];
 
 const mesa = document.querySelector(".juego");
@@ -138,11 +142,29 @@ const cambiarVista = (destino) => {
   for (let i=0; i<vistas.length; i++)  vistas[i].classList.add("oculto")
     if (destino === `empezar`) document.querySelector("#vistaJugadores").classList.remove("oculto")
     if (destino === `reglas`) document.querySelector("#vistaReglas").classList.remove("oculto")
-    if (destino === `juego`) document.querySelector("#vistaJuego").classList.remove("oculto")
     if (destino === `victoria`) document.querySelector("#vistaVictoria").classList.remove("oculto")
     if (destino === `inicio`) document.querySelector("#vistaInicio").classList.remove("oculto")
 
 
 }
 
+const modoDeJuego = () => {
+  let pvp = document.querySelector("#modoDeJuego").checked
+  pvp === true 
+  ? document.querySelector("#input2").classList.add("inactiva") 
+  : document.querySelector("#input2").classList.remove("inactiva")
+  cpu = cpu === false ? true : false
+}
+
+const comprobarJugadores = () => {
+  nombreJugador1 = document.querySelector("#input1").value
+  console.log(nombreJugador1)
+  let pvp = document.querySelector("#modoDeJuego").checked
+  console.log(pvp)
+
+}
+
 crearTablero()
+
+
+

@@ -47,11 +47,19 @@
       <div class="border">
         <div class="principal">
           <div id="inputs">
-            <input type="text" class="form" id="input1" placeholder="Jugador 1" required>
-            <input type="text" class="form" id="input2" placeholder="Jugador 2" required>
+            <input type="text" class="form" id="input1" placeholder="Jugador 1">
+            <div class="btn-container">
+		
+              <label class="switch btn-color-mode-switch">
+                    <input type="checkbox" name="color_mode" id="modoDeJuego" value="0" onchange="modoDeJuego()">
+                    <label for="color_mode" data-on="PvC" data-off="PvP" class="btn-color-mode-switch-inner"></label>
+              </label>
+        
+            </div>
+            <input type="text" class="form" id="input2" placeholder="Jugador 2">
           </div>
           <div>
-            <input type="submit" id="enviar" value="▶" onclick="cambiarVista(`juego`)">
+            <input type="submit" id="enviar" value="▶" onclick="comprobarJugadores()">
           </div>
         </div>
       </div>
