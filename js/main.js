@@ -51,6 +51,10 @@ const reset = () => {
   fichasJugador2 = 3;
   jugadorActual = "O";
   jugando = true;
+  document.querySelector("#fichasJugador1").textContent =
+  `${fichasJugador1}` + " Fichas";
+  document.querySelector("#fichasJugador2").textContent =
+  `${fichasJugador2}` + " Fichas";
 
   crearTablero();
 };
@@ -132,9 +136,19 @@ const comprobarGanador = () => {
       if (e === jugadorActual)
         document.querySelector(`#casilla${i}`).classList.add("ganar");
         document.querySelector(`#casilla${i}`).classList.add("inactiva");
+        document.querySelector('#reinicio').classList.add("ganar")
     });
     
     jugando = false;
+    const ganador = comprobarTablero()
+    if (ganador === "O"){
+      document.querySelector("#fichasJugador1").textContent = "¡" + nombreJugador1 + " ha ganado!";
+      document.querySelector("#fichasJugador2").textContent = "¡" + nombreJugador2 + " ha perdido!";
+    }
+    if (ganador === "X"){
+      document.querySelector("#fichasJugador1").textContent = "¡" + nombreJugador1 + " ha perdido!";
+      document.querySelector("#fichasJugador2").textContent = "¡" + nombreJugador2 + " ha ganado!";
+    }
     return jugadorActual
   }
 };
@@ -174,13 +188,15 @@ const comprobarTablero = () => {
 
 // cambiar turno
 const cambiarTurno = () => {
-  jugadorActual === jugador1 ? fichasJugador1-- : fichasJugador2--;
-  document.querySelector("#fichasJugador1").textContent =
+  if (jugando===true){
+    jugadorActual === jugador1 ? fichasJugador1-- : fichasJugador2--;
+    document.querySelector("#fichasJugador1").textContent =
     `${fichasJugador1}` + " Fichas";
-  document.querySelector("#fichasJugador2").textContent =
+    document.querySelector("#fichasJugador2").textContent =
     `${fichasJugador2}` + " Fichas";
-  jugadorActual = jugadorActual === jugador1 ? jugador2 : jugador1;
-  turnos++;
+    jugadorActual = jugadorActual === jugador1 ? jugador2 : jugador1;
+    turnos++;
+  }
 };
 
 // cambiar vistas
