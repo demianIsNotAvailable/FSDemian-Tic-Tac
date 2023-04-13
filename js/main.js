@@ -55,6 +55,7 @@ const reset = () => {
   `${fichasJugador1}` + " Fichas";
   document.querySelector("#fichasJugador2").textContent =
   `${fichasJugador2}` + " Fichas";
+  document.querySelector('#reinicio').classList.remove("ganar")
 
   crearTablero();
 };
