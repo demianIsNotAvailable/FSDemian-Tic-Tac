@@ -3,7 +3,7 @@ const jugador2 = "X";
 
 let nombreJugador1 = "";
 let nombreJugador2 = "";
-let cpu = false;
+let pvp = false;
 let jugando = true;
 let jugadorActual = jugador1;
 let turnos = 0;
@@ -32,15 +32,12 @@ const actualizarTablero = () => {
         document.querySelector(`#casilla${i}`).innerText = tablero[i];
       }
     });
-  } else if (turnos == 6) {
+  } else  {
     tablero.forEach((e, i) => {
-      if (e !== jugadorActual) {
+    
+        document.querySelector(`#casilla${i}`).innerText = e;
         document.querySelector(`#casilla${i}`).classList.add("ocupada");
-        document.querySelector(`#casilla${i}`).innerText = tablero[i];
-      } else {
-        document.querySelector(`#casilla${i}`).classList.remove("ocupada");
-        document.querySelector(`#casilla${i}`).innerText = tablero[i];
-      }
+     
     });
   }
 };
@@ -50,6 +47,8 @@ const actualizarTablero = () => {
 const reset = () => {
   tablero = ["", "", "", "", "", "", "", "", ""];
   turnos = 0;
+  fichasJugador1 = 3;
+  fichasJugador2 = 3;
   jugadorActual = "O";
   jugando = true;
 
@@ -66,18 +65,54 @@ const mover = (i) => {
       comprobarGanador();
       cambiarTurno();
       actualizarTablero();
+      if (pvp===true) moverPvp(); 
     } else quitar(i);
   }
   return null;
 };
+
+const moverPvp = () => {
+  let aux= []
+  tablero.forEach((e, i) => {if (e === '') aux.push(i)})
+  let ind = aux[Math.floor(Math.random()*aux.length)]
+  if (fichasJugador2 === 0) {
+    tablero[tablero.indexOf('X')] = ''
+    fichasJugador2++
+  }   
+  tablero[ind] = 'X'
+
+
+
+
+  actualizarTablero()
+  comprobarGanador()
+  cambiarTurno();
+
+  tablero.forEach((e, i) => {
+    document.querySelector(`#casilla${i}`).innerText = e})
+
+}
 
 // recolocar ficha
 
 const quitar = (i) => {
   if (turnos === 6 && tablero[i] === jugadorActual) {
     tablero[i] = "";
+    actualizarTablero();
+    tablero.forEach((e, i) => {
+      document.querySelector(`#casilla${i}`).innerText = tablero[i];
+      document.querySelector(`#casilla${i}`).classList.remove("ocupada");
+      if (e === jugador1 || e === jugador2) {
+        document.querySelector(`#casilla${i}`).classList.add("ocupada");
+      }
+    });
+    jugadorActual === jugador1 ? fichasJugador1++ : fichasJugador2++;
+    document.querySelector("#fichasJugador1").textContent =`${fichasJugador1}` + " Fichas";
+    document.querySelector("#fichasJugador2").textContent =`${fichasJugador2}` + " Fichas";
+
     turnos--;
-    crearTablero();
+    if (pvp === true) turnos--
+
     return null;
   }
 };
@@ -90,7 +125,7 @@ const comprobarGanador = () => {
     tablero.forEach((e, i) => {
       if (e === jugadorActual)
         document.querySelector(`#casilla${i}`).classList.add("ganar");
-        document.querySelector(`#casilla${i}`).classList.add("inactiva");
+      document.querySelector(`#casilla${i}`).classList.add("inactiva");
     });
     jugando = false;
   }
@@ -131,40 +166,50 @@ const comprobarTablero = () => {
 
 // cambiar turno
 const cambiarTurno = () => {
+  jugadorActual === jugador1 ? fichasJugador1-- : fichasJugador2--;
+  document.querySelector("#fichasJugador1").textContent =
+    `${fichasJugador1}` + " Fichas";
+  document.querySelector("#fichasJugador2").textContent =
+    `${fichasJugador2}` + " Fichas";
   jugadorActual = jugadorActual === jugador1 ? jugador2 : jugador1;
   turnos++;
 };
 
-
-// cambiar vistas 
+// cambiar vistas
 const cambiarVista = (destino) => {
-  const vistas = document.querySelectorAll("div.vista")
-  for (let i=0; i<vistas.length; i++)  vistas[i].classList.add("oculto")
-    if (destino === `empezar`) document.querySelector("#vistaJugadores").classList.remove("oculto")
-    if (destino === `reglas`) document.querySelector("#vistaReglas").classList.remove("oculto")
-    if (destino === `victoria`) document.querySelector("#vistaVictoria").classList.remove("oculto")
-    if (destino === `inicio`) document.querySelector("#vistaInicio").classList.remove("oculto")
-
-
-}
+  const vistas = document.querySelectorAll("div.vista");
+  for (let i = 0; i < vistas.length; i++) vistas[i].classList.add("oculto");
+  if (destino === `empezar`)
+    document.querySelector("#vistaJugadores").classList.remove("oculto");
+  if (destino === `reglas`)
+    document.querySelector("#vistaReglas").classList.remove("oculto");
+  if (destino === `victoria`)
+    document.querySelector("#vistaVictoria").classList.remove("oculto");
+  if (destino === `inicio`)
+    document.querySelector("#vistaInicio").classList.remove("oculto");
+  if (destino === `juego`)
+    document.querySelector(`#vistaJuego`).classList.remove("oculto");
+};
 
 const modoDeJuego = () => {
-  let pvp = document.querySelector("#modoDeJuego").checked
-  pvp === true 
-  ? document.querySelector("#input2").classList.add("inactiva") 
-  : document.querySelector("#input2").classList.remove("inactiva")
-  cpu = cpu === false ? true : false
-}
+  pvp = document.querySelector("#modoDeJuego").checked;
+
+  if (pvp === true) {
+    document.querySelector(`#input2`).classList.add("inactiva");
+    return (document.querySelector(`#input2`).value = `Terminator`);
+  }
+  document.querySelector(`#input2`).classList.remove("inactiva");
+  document.querySelector(`#input2`).value = ``;
+};
 
 const comprobarJugadores = () => {
-  nombreJugador1 = document.querySelector("#input1").value
-  console.log(nombreJugador1)
-  let pvp = document.querySelector("#modoDeJuego").checked
-  console.log(pvp)
+  nombreJugador1 = document.querySelector("#input1").value;
+  nombreJugador2 = document.querySelector("#input2").value;
+  if (!!nombreJugador1 && !!nombreJugador2) {
+    document.querySelector("#nombreJugador1").textContent = nombreJugador1;
+    document.querySelector("#nombreJugador2").textContent = nombreJugador2;
+    cambiarVista(`juego`);
+  }
+};
 
-}
-
-crearTablero()
-
-
-
+crearTablero();
