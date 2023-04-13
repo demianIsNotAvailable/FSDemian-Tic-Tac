@@ -65,7 +65,7 @@ const mover = (i) => {
       comprobarGanador();
       cambiarTurno();
       actualizarTablero();
-      if (pvp===true) moverPvp(); 
+      if (pvp===true && jugando===true) moverPvp(); 
     } else quitar(i);
   }
   return null;
@@ -81,9 +81,6 @@ const moverPvp = () => {
   }   
   tablero[ind] = 'X'
 
-
-
-
   actualizarTablero()
   comprobarGanador()
   cambiarTurno();
@@ -91,6 +88,15 @@ const moverPvp = () => {
   tablero.forEach((e, i) => {
     document.querySelector(`#casilla${i}`).innerText = e})
 
+  if (fichasJugador1 === 0) { 
+    tablero.forEach((e, i) => {
+      document.querySelector(`#casilla${i}`).innerText = e;
+      document.querySelector(`#casilla${i}`).classList.add("ocupada");
+      if (e === 'O') document.querySelector(`#casilla${i}`).classList.remove("ocupada");
+
+  })
+      
+  }
 }
 
 // recolocar ficha
@@ -125,9 +131,11 @@ const comprobarGanador = () => {
     tablero.forEach((e, i) => {
       if (e === jugadorActual)
         document.querySelector(`#casilla${i}`).classList.add("ganar");
-      document.querySelector(`#casilla${i}`).classList.add("inactiva");
+        document.querySelector(`#casilla${i}`).classList.add("inactiva");
     });
+    
     jugando = false;
+    return jugadorActual
   }
 };
 
@@ -203,13 +211,13 @@ const modoDeJuego = () => {
 };
 
 const comprobarJugadores = () => {
-  nombreJugador1 = document.querySelector("#input1").value;
+  nombreJugador1 = document.querySelector("#input1").value ;
   nombreJugador2 = document.querySelector("#input2").value;
   if (!!nombreJugador1 && !!nombreJugador2) {
-    document.querySelector("#nombreJugador1").textContent = nombreJugador1;
-    document.querySelector("#nombreJugador2").textContent = nombreJugador2;
+    document.querySelector("#nombreJugador1").textContent = nombreJugador1 + " (O)";
+    document.querySelector("#nombreJugador2").textContent = nombreJugador2 + " (X)";
     cambiarVista(`juego`);
   }
 };
 
-crearTablero();
+crearTablero()
