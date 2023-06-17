@@ -170,6 +170,7 @@ body {
   border-radius: 10px;
   border: 5px solid rgba(211, 86, 28,0.2);
   color: rgba(3, 233, 244,0.8);
+  cursor: pointer;
   transition: all 0.5s;
 }
 
