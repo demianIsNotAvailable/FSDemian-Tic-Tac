@@ -419,9 +419,16 @@ label {
 
 .btn-color-mode-switch input[type="checkbox"]:checked ~ .alert{
   display: block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 
 #reinicio {
   cursor: pointer;
+}
+
+#modoDeJuego {
+  width: 10em ;
+  margin-left: -5em;
 }
