@@ -420,3 +420,8 @@ label {
 .btn-color-mode-switch input[type="checkbox"]:checked ~ .alert{
   display: block;
 }
+
+
+#reinicio {
+  cursor: pointer;
+}
