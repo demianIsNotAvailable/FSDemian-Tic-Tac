@@ -3,7 +3,7 @@ const jugador2 = "X";
 
 let nombreJugador1 = "";
 let nombreJugador2 = "";
-let pvp = false;
+let pvp = true;
 let jugando = true;
 let jugadorActual = jugador1;
 let turnos = 0;
